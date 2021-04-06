@@ -13,8 +13,8 @@
 
     <ImageView
         android:id="@+id/back_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dimen_42dp"
+        android:layout_height="@dimen/dimen_42dp"
         android:visibility="gone"
         android:background="@drawable/arrow_back"/>
 

@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
+            ViewModelFactory(ApiHelper(RetrofitBuilder(this).apiService))
         ).get(MainViewModel::class.java)
     }
 
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.getUsers(Common.getCurrentDate(),"publishedAt",Constants.API_KEY).observe(this, Observer {
+        viewModel.getUsers("2021-04-06"/*Constants.getCurrentDate()*/,"publishedAt",Constants.API_KEY).observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     ServiceStatus.SUCCESS -> {
