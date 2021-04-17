@@ -15,17 +15,17 @@
         android:id="@+id/back_icon"
         android:layout_width="@dimen/dimen_42dp"
         android:layout_height="@dimen/dimen_42dp"
-        android:visibility="gone"
-        android:background="@drawable/arrow_back"/>
+        android:background="@drawable/arrow_back"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dimen_29sp"
-        android:textColor="@color/white"
-        android:text="Head Lines"
         android:fontFamily="@font/robotoslab_bold"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Head Lines"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_29sp" />
 
 </androidx.appcompat.widget.Toolbar>

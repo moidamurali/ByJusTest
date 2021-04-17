@@ -22,9 +22,10 @@ class RetrofitBuilder(val context: Context) {
         val httpCacheDirectory = File(context.getCacheDir(), "responses")
         // 15 MiB cache
         val cache = Cache(httpCacheDirectory, 15 * 1024 * 1024)
-        val httpClient =  OkHttpClient.Builder()
+        val httpClient = OkHttpClient.Builder()
             .cache(
-                cache)
+                cache
+            )
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)

@@ -1,6 +1,9 @@
 package com.murali.byjus.ui.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.murali.byjus.R
 import com.murali.byjus.servicedata.model.Articles
+import com.murali.byjus.ui.view.DetailsActivity
 import com.murali.byjus.utils.Common
 import com.murali.byjus.utils.Constants
 
@@ -79,11 +83,9 @@ class NewsAdapter(
             subject: Articles,
             context: Context
         ) {
-            // This method will be called anytime a list item is created or update its data
-            //Do your stuff here
-                descriptionTV.text = subject.description
-                authorTV.text = subject.author
-            if (subject.publishedAt!=null)
+            descriptionTV.text = subject.description
+            authorTV.text = subject.author
+            if (subject.publishedAt != null)
                 dateTV.text = Common.convertDate(subject.publishedAt)
 
 
@@ -93,12 +95,16 @@ class NewsAdapter(
                 .error(R.drawable.ic_placeholder) //error
                 .into(articleImageView);
 
+            articleImageView.setOnClickListener(View.OnClickListener {
+                val intent = Intent(context, DetailsActivity::class.java)
+                intent.putExtra("Details", subject)
+                context.startActivity(intent)
+            })
+
         }
 
 
     }
-
-
 
 
 }

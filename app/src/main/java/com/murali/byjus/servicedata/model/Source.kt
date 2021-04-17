@@ -1,9 +1,11 @@
 package  com.murali.byjus.servicedata.model
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Source (
 
-	@SerializedName("id") val id : String,
-	@SerializedName("name") val name : String
-)
+	val id : String? = null,
+	val name : String
+): Parcelable

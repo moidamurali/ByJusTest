@@ -34,10 +34,11 @@ class MainActivity : AppCompatActivity() {
         getSupportActionBar()?.hide();
         setContentView(R.layout.activity_main)
 
-        if(Common.isOnline(this)) {
+        if (Common.isOnline(this)) {
+            progressBar.visibility = View.VISIBLE
             setupViewModel()
             setupObservers()
-        }else{
+        } else {
             progressBar.visibility = View.GONE
             Common.showNetworkAlert(this)
         }
@@ -65,44 +66,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.getUsers("2021-04-06"/*Constants.getCurrentDate()*/,"publishedAt",Constants.API_KEY).observe(this, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    ServiceStatus.SUCCESS -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
-                        //resource.data?.let { news -> retrieveList(news) }
-                        resource.data?.enqueue(object : Callback<News?> {
-                            override fun onResponse(
-                                call: Call<News?>?,
-                                response: Response<News?>
-                            ) {
-                                if (response.isSuccessful()) {
-                                    response.body()?.articles?.let { it1 -> setupUI(it1) }
+        viewModel.getUsers(Common.getCurrentDate(), "publishedAt", Constants.API_KEY)
+            .observe(this, Observer {
+                it?.let { resource ->
+                    when (resource.status) {
+                        ServiceStatus.SUCCESS -> {
+                            recyclerView.visibility = View.VISIBLE
+                            //resource.data?.let { news -> retrieveList(news) }
+                            resource.data?.enqueue(object : Callback<News?> {
+                                override fun onResponse(
+                                    call: Call<News?>?,
+                                    response: Response<News?>
+                                ) {
+                                    if (response.isSuccessful()) {
+                                        progressBar.visibility = View.GONE
+                                        response.body()?.articles?.let { it1 -> setupUI(it1) }
+                                    }
                                 }
-                            }
 
-                            override fun onFailure(
-                                call: Call<News?>?,
-                                t: Throwable
-                            ) {
-                                setupUI(arrayListOf())
-                                t.printStackTrace()
-                            }
-                        })
-                    }
-                    ServiceStatus.ERROR -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    ServiceStatus.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
+                                override fun onFailure(
+                                    call: Call<News?>?,
+                                    t: Throwable
+                                ) {
+                                    progressBar.visibility = View.GONE
+                                    setupUI(arrayListOf())
+                                    t.printStackTrace()
+                                }
+                            })
+                        }
+                        ServiceStatus.ERROR -> {
+                            recyclerView.visibility = View.VISIBLE
+                            progressBar.visibility = View.GONE
+                            Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        }
+                        ServiceStatus.LOADING -> {
+                            progressBar.visibility = View.VISIBLE
+                            recyclerView.visibility = View.GONE
+                        }
                     }
                 }
-            }
-        })
+            })
 
     }
 

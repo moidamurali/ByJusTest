@@ -1,45 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/main_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/transperant_colour"
-        android:theme="@style/Theme.AppCompat.DayNight"
+    <include
+        layout="@layout/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="?attr/actionMenuTextColor">
-
-        <ImageView
-            android:id="@+id/back_icon"
-            android:layout_width="@dimen/dimen_42dp"
-            android:layout_height="@dimen/dimen_42dp"
-            android:background="@drawable/arrow_back"/>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/media_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_description"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_12dp"
-        android:layout_marginLeft="@dimen/dimen_12dp"
-        android:layout_marginBottom="@dimen/dimen_24dp"
+        android:layout_marginStart="@dimen/dimen_24dp"
+        android:layout_marginLeft="@dimen/dimen_24dp"
+        android:layout_marginBottom="@dimen/dimen_64dp"
         android:fontFamily="@font/robotoslab_bold"
-        android:textColor="@color/author_text_colour"
+        android:textColor="@color/main_screen_text_colour"
+        android:textSize="@dimen/dimen_29sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_author"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -47,26 +27,41 @@
         android:id="@+id/tv_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_12dp"
-        android:layout_marginLeft="@dimen/dimen_12dp"
-        android:layout_marginBottom="@dimen/dimen_12dp"
-        android:fontFamily="@font/robotoslab_bold"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_24dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:fontFamily="@font/robotoslab_regular"
         android:lineSpacingExtra="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/author_text_colour"
-        android:textSize="@dimen/dimen_12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/dimen_20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_description"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_date"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_12dp"
-        android:layout_marginBottom="@dimen/dimen_12dp"
-        android:fontFamily="@font/robotoslab_bold"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:fontFamily="@font/robotoslab_regular"
         android:textColor="@color/author_text_colour"
-        android:textSize="@dimen/dimen_12sp"
+        android:textSize="@dimen/dimen_20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_description"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:fontFamily="@font/robotoslab_regular"
+        android:textColor="@color/author_text_colour"
+        android:textSize="@dimen/dimen_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_author" />
 

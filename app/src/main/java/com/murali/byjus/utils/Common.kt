@@ -13,8 +13,10 @@ import java.util.*
 class Common {
     companion object {
 
-        fun getCurrentDate(): String {
-            val date: Date = Calendar.getInstance().getTime();
+        fun getCurrentDate(): String? {
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DATE, -1)
+            val date: Date = calendar.getTime();
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             return sdf.format(date);
         }
